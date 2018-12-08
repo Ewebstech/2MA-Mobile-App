@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activities.Settings"
+    >
+
+
+    <TextView
+        android:id="@+id/edit_profileTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:gravity="start"
+        android:padding="16dp"
+        android:text="Edit your profile"
+        android:textSize="25sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+
+        />
+    <TextView
+        android:id="@+id/change_passwordTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:text="Change Password"
+        android:textSize="25sp"
+        android:gravity="start"
+        android:padding="16dp"
+        android:elevation="8dp"
+        />
+
+</LinearLayout>

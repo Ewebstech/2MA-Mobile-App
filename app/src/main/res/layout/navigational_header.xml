@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+    android:background="@drawable/dashboardheader"
+    android:gravity="bottom"
+    android:padding="16dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_img"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:contentDescription="profile"
+        app:civ_border_width="@dimen/_2sdp"
+        app:civ_border_color="#FF000000"
+        android:src="@drawable/boy" />
+
+    <TextView
+        android:id="@+id/full_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/profile_img"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_toEndOf="@+id/profile_img"
+        android:layout_toRightOf="@+id/profile_img"
+        android:text="Sanusi"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:textSize="@dimen/_20ssp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textColor="@color/appBlue" />
+
+    <TextView
+        android:id="@+id/user_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/profile_img"
+        android:layout_toEndOf="@+id/profile_img"
+        android:layout_toRightOf="@+id/profile_img"
+        android:text="Patient"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        android:textColor="@color/appBlue" />
+
+</RelativeLayout>

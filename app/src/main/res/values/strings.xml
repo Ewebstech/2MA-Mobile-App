@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Mobile Medical Aid</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="med_quote_reg">All the money in the world can\'t buy you back good health. -Reba McEntire</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="terms_conditions_reg">All information collected are been treated as confidential,
+        Users are therefore advised to provide correct details</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="naira_sign">\u20A6</string>
+
+</resources>
