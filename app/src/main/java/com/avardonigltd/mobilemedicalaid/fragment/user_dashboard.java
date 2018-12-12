@@ -14,16 +14,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.avardonigltd.mobilemedicalaid.R;
 import com.avardonigltd.mobilemedicalaid.activities.ForgotPassword;
 import com.avardonigltd.mobilemedicalaid.activities.KYC;
+import com.avardonigltd.mobilemedicalaid.adapters.GsonPreferenceAdapter;
 import com.avardonigltd.mobilemedicalaid.interfaces.Listeners;
+import com.avardonigltd.mobilemedicalaid.model.ContentModel;
 import com.avardonigltd.mobilemedicalaid.model.LoginResponse;
 import com.avardonigltd.mobilemedicalaid.utility.AppPreference;
 import com.f2prateek.rx.preferences2.RxSharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,8 +51,15 @@ public class user_dashboard extends Fragment {
     @BindView(R.id.full_name)TextView fullNameTV;
     @BindView(R.id.user_type) TextView userTV;
     @BindView(R.id.client_id) TextView clientIdTV;
-
-    private String customerName, user, clientId, firstName, lastName;
+    @BindView(R.id.status_dashboard) TextView statusTv;
+    @BindView(R.id.calls_Tv) TextView callsTv;
+    @BindView(R.id.packageTv) TextView packageTv;
+    @BindView(R.id. message_for_status) TextView messageForStatusTV;
+    String formattedDate;
+    @BindView(R.id.day) TextView dateTV;
+    @BindView(R.id.month) TextView monthTV;
+    private String customerName, user, clientId, firstName, lastName,content,status,calls,
+            packageText, messageForStatus;
     private Unbinder unbinder;
 
     public user_dashboard() {
@@ -71,8 +86,14 @@ public class user_dashboard extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Date c = Calendar.getInstance().getTime();
+        Calendar e = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd");
+        formattedDate = df.format(c);
+        dateTV.setText(formattedDate);
+        String actualMonth = String.format(Locale.US,"%tB",e);
+        monthTV.setText(actualMonth);
         bindViewToPreference();
-
     }
 
     @Override
@@ -112,21 +133,43 @@ public class user_dashboard extends Fragment {
                                 if(TextUtils.isEmpty(s) || TextUtils.equals(s, "null")){
                                     return;
                                 }
+                                // to convert String to object
                                 Gson gson = new GsonBuilder().create();
                                 LoginResponse userDataResponse = gson.fromJson(s,LoginResponse.class);
 
                                 clientId = userDataResponse.getData().getClientId();
                                 user = userDataResponse.getData().getRole();
                                 firstName = userDataResponse.getData().getFirstname();
+                                content =  userDataResponse.getData().getContent();
                                 lastName = userDataResponse.getData().getLastname();
                                 Log.i("TAG",clientId);
                                 Log.i("TAG",user);
                                 Log.i("TAG",firstName);
 
+                                // to convert string to object also
+                                ContentModel userDataResponse2 = gson.fromJson(content,ContentModel.class);
+                                calls = userDataResponse2.getCalls();
+                                status = userDataResponse2.getStatus();
+                                packageText = userDataResponse2.getPackages();
                                 customerName = firstName+" "+lastName;
                                 fullNameTV.setText(customerName);
                                 userTV.setText(user);
                                 clientIdTV.setText(clientId);
+                                statusTv.setText(status);
+                                callsTv.setText(calls);
+
+                                if (status.equals("Active")){
+                                    packageTv.setText(packageText);
+                                    statusTv.setTextColor(getResources().getColor(R.color.appyellow));
+                                    messageForStatus = "Activated to make calls to Doctors";
+                                    messageForStatusTV.setText(messageForStatus);
+                                }else {
+                                    packageTv.setText(packageText);
+                                    statusTv.setTextColor(getResources().getColor(R.color.appRed));
+                                    messageForStatus = "Subscription Exhausted";
+                                    messageForStatusTV.setText(messageForStatus);
+                                }
+
                             }
                         })
         );

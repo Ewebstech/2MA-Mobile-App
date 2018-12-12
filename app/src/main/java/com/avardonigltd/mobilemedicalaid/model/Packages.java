@@ -40,13 +40,26 @@ public class Packages {
         this.data = data;
     }
 
-    public class DataOfPackage {
+    public static class DataOfPackage {
         @Expose @SerializedName("Title") String title;
         @Expose @SerializedName("Price") String price;
-
+        int img;
         public DataOfPackage(String title, String price) {
             this.title = title;
             this.price = price;
+        }
+        public DataOfPackage(String title, String price,int img) {
+            this.title = title;
+            this.price = price;
+            this.img = img;
+        }
+
+        public int getImg() {
+            return img;
+        }
+
+        public void setImg(int img) {
+            this.img = img;
         }
 
         public String getTitle() {

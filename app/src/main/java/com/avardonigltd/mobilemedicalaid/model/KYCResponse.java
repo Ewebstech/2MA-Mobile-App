@@ -6,9 +6,11 @@ import com.google.gson.annotations.SerializedName;
 public class KYCResponse {
     @Expose @SerializedName("status") boolean status;
     @Expose @SerializedName("message") String message;
-    @Expose @SerializedName("data") KYCRequest data;
+    @Expose @SerializedName("data") Datud data;
 
-    public KYCResponse(boolean status, String message, KYCRequest data) {
+//    @Expose @SerializedName("data") KYCRequest data;
+
+    public KYCResponse(boolean status, String message, Datud data) {
         this.status = status;
         this.message = message;
         this.data = data;
@@ -30,11 +32,26 @@ public class KYCResponse {
         this.message = message;
     }
 
-    public KYCRequest getData() {
+    public Datud getData() {
         return data;
     }
 
-    public void setData(KYCRequest data) {
+    public void setData(Datud data) {
         this.data = data;
+    }
+
+    public class Datud{
+        @Expose @SerializedName("Kyc") KYCRequest kycRequest;
+        public Datud(KYCRequest kycRequest) {
+            this.kycRequest = kycRequest;
+        }
+
+        public KYCRequest getKycRequest() {
+            return kycRequest;
+        }
+
+        public void setKycRequest(KYCRequest kycRequest) {
+            this.kycRequest = kycRequest;
+        }
     }
 }

@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.airbnb.lottie.L;
 import com.avardonigltd.mobilemedicalaid.BuildConfig;
 import com.avardonigltd.mobilemedicalaid.adapters.GsonPreferenceAdapter;
+import com.avardonigltd.mobilemedicalaid.model.GetPackageSelecetedResponse;
 import com.avardonigltd.mobilemedicalaid.model.LoginResponse;
 import com.avardonigltd.mobilemedicalaid.model.RegistrationResponse.Datum;
 import com.google.gson.Gson;
@@ -25,6 +27,7 @@ public class AppPreference {
     public static final String USER_DETAILS_PASSWORD = "user_details_password";
     public static final String USER_DETAILS_CLIENT_ID = "user_details_client_id";
     public static final String USER_DATA= "USER_DATA";
+    public static final String USER_KYC= "USER_KYC";
  //   public static final String USER_DETAILS_TOKEN = "user_details_token";
 
 
@@ -109,9 +112,38 @@ public class AppPreference {
         }
     }
 
+
+    public static void setUserDetailsClientId(String account_number) {
+        if (sharedPreferences != null) {
+            sharedPreferences.edit().putString(USER_DETAILS_CLIENT_ID, account_number).apply();
+        }
+    }
+
+    public static String getUserDetailsClientId() {
+        if (sharedPreferences != null) {
+            return sharedPreferences.getString(USER_DETAILS_CLIENT_ID, BuildConfig.FLAVOR);
+        }
+        return BuildConfig.FLAVOR;
+    }
+
     public static void setUserData(LoginResponse loginResponse) {
         Gson gson = new GsonBuilder().create();
         GsonPreferenceAdapter<LoginResponse> adapter = new GsonPreferenceAdapter<>(gson, LoginResponse.class);
         adapter.set(USER_DATA, loginResponse, sharedPreferences.edit());
     }
+
+    public static LoginResponse getUserData() {
+        Gson gson = new GsonBuilder().create();
+        GsonPreferenceAdapter<LoginResponse> adapter = new GsonPreferenceAdapter<>(gson, LoginResponse.class);
+        LoginResponse loginResponse = adapter.get(USER_DATA, sharedPreferences);
+        return loginResponse;
+    }
+
+//    public static GetPackageSelecetedResponse getUserDataInPackage() {
+//        Gson gson = new GsonBuilder().create();
+//        GsonPreferenceAdapter<GetPackageSelecetedResponse> adapter = new GsonPreferenceAdapter<>(gson, GetPackageSelecetedResponse.class);
+//        GetPackageSelecetedResponse getPackageSelecetedResponse = adapter.get(USER_DATA, sharedPreferences);
+//        return getPackageSelecetedResponse;
+//    }
+
 }

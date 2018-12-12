@@ -12,9 +12,22 @@
         Users are therefore advised to provide correct details</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="terms_conditions_text">Lorem Ipsum is simply dummy text of the printing and
+        typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the
+        1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        It has survived not only five centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+        sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+        including versions of Lorem Ipsum.</string>
+
+    <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="pick_picture">picture Picked</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="naira_sign">\u20A6</string>
+    <string name="we_need_to_know_more_about_you_to_enable_us_provide_the_best_medical_service_you_deserve_kindly_update_your_profile_with_your_kyc_information_it_s_easy_and_simple_although_you_can_skip_to_complete_it_later">We need to know more about you to enable us provide the best medical service you deserve. Kindly update your profile with your KYC information. It\'s easy and simple, although you can skip to complete it later.</string>
+    <string name="message_kyc">We need to know our client and you can help us by helping to fill the fields in the KYC. You can skip the KYC and fill it later.</string>
 
 </resources>

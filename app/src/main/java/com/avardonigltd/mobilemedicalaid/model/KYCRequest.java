@@ -46,6 +46,9 @@ public class KYCRequest {
         this.role = role;
     }
 
+    public KYCRequest() {
+    }
+
     public String getTreatment_status() {
         return treatment_status;
     }

@@ -115,6 +115,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/message_for_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_4sdp"
@@ -128,6 +129,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/status_dashboard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_4sdp"
@@ -171,7 +173,7 @@
                         android:weightSum="1"
                         >
                         <android.support.constraint.ConstraintLayout
-                            android:layout_width="@dimen/_225sdp"
+                            android:layout_width="@dimen/_200sdp"
                             android:layout_height="@dimen/_60sdp"
                             android:orientation="vertical"
                             android:layout_weight="0.8"
@@ -257,7 +259,7 @@
                         </android.support.constraint.ConstraintLayout>
 
                         <LinearLayout
-                            android:layout_width="@dimen/_60sdp"
+                            android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_60sdp"
                             android:background="@color/appBlue"
                             android:gravity="center"
@@ -266,18 +268,20 @@
                             >
 
                             <TextView
+                                android:id="@+id/day"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="20"
+                                android:text="10"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_20ssp" />
+
                             <TextView
+                                android:id="@+id/month"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/_10ssp"
-                                android:text="JANUARY"
+                                android:text="DECEMBER"
                                 android:textColor="@color/white"
-                                />
+                                android:textSize="@dimen/_10ssp" />
                         </LinearLayout>
 
 
@@ -311,24 +315,25 @@
                                     android:gravity="center_horizontal"
                                     android:layout_gravity="center_horizontal"
                                     >
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginEnd="@dimen/_4sdp"
-                                        android:layout_marginLeft="@dimen/_4sdp"
-                                        android:layout_marginRight="@dimen/_4sdp"
-                                        android:layout_marginStart="@dimen/_4sdp"
-                                        android:layout_marginTop="@dimen/_10sdp"
-                                        android:text="@string/naira_sign"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_20ssp"
-                                        />
+                                    <!--<TextView-->
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_marginEnd="@dimen/_4sdp"-->
+                                        <!--android:layout_marginLeft="@dimen/_4sdp"-->
+                                        <!--android:layout_marginRight="@dimen/_4sdp"-->
+                                        <!--android:layout_marginStart="@dimen/_4sdp"-->
+                                        <!--android:layout_marginTop="@dimen/_10sdp"-->
+                                        <!--android:text="@string/naira_sign"-->
+                                        <!--android:textColor="@color/white"-->
+                                        <!--android:textSize="@dimen/_20ssp"-->
+                                        <!--/>-->
 
                                     <TextView
+                                        android:id="@+id/calls_Tv"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/_10sdp"
-                                        android:text="79709.60"
+                                        android:text="0"
                                         android:textSize="@dimen/_20ssp"
                                         android:layout_marginRight="@dimen/_2sdp"
                                         android:layout_marginEnd="@dimen/_2sdp"
@@ -344,7 +349,7 @@
                                     android:layout_marginTop="@dimen/_10sdp"
                                     android:drawableLeft="@drawable/ic_payment_method"
                                     android:drawableStart="@drawable/ic_payment_method"
-                                    android:text="Calling Balance"
+                                    android:text="Call Balance"
                                     android:textAllCaps="false"
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/_15ssp"
@@ -383,7 +388,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/_10sdp"
-                                        android:text="2MA Packages"
+                                        android:text="2MA Package"
                                         android:textSize="@dimen/_18ssp"
                                         android:layout_marginRight="@dimen/_2sdp"
                                         android:layout_marginEnd="@dimen/_2sdp"
@@ -393,6 +398,7 @@
                                 </LinearLayout>
 
                                 <TextView
+                                    android:id="@+id/packageTv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
@@ -400,7 +406,7 @@
                                     android:drawableLeft="@drawable/ic_subscription"
                                     android:drawableStart="@drawable/ic_subscription"
                                     android:drawablePadding="@dimen/_4sdp"
-                                    android:text="Platinium"
+                                    android:text="None"
                                     android:textAllCaps="false"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_15ssp"

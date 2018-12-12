@@ -13,14 +13,30 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.avardonigltd.mobilemedicalaid.R;
+import com.avardonigltd.mobilemedicalaid.fragment.SubscriptionFragment;
 import com.avardonigltd.mobilemedicalaid.fragment.Terms;
 import com.avardonigltd.mobilemedicalaid.fragment.UpdateUserProfileFragment;
 import com.avardonigltd.mobilemedicalaid.fragment.user_dashboard;
 import com.avardonigltd.mobilemedicalaid.interfaces.Listeners;
+import com.avardonigltd.mobilemedicalaid.model.LoginResponse;
+import com.avardonigltd.mobilemedicalaid.utility.AppPreference;
+import com.f2prateek.rx.preferences2.RxSharedPreferences;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 public class NavigationalDrawer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Listeners{
 
@@ -29,7 +45,18 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private Fragment selectedFragment;
+    String fullname, usertype;
 
+
+
+//    @BindView(R.id.full_name_nav)
+//    TextView fullnameTv;
+//    @BindView(R.id.user_type_nav)
+//    TextView userTypeTv;
+      private CompositeDisposable compositeDisposable = new CompositeDisposable();
+//    private Unbinder unbinder;
+    TextView fullnameTv;
+    TextView userTypeTv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +65,12 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
         setSupportActionBar(toolbar);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+       // View headerView = navigationView.getHeaderView(0);
+       //  fullnameTv = (TextView) headerView.findViewById(R.id.full_name_nav);
+         //userTypeTv = (TextView) headerView.findViewById(R.id.user_type_nav);
+       // unbinder = ButterKnife.bind(this);
+
 
         mDrawer = findViewById(R.id.drawer_layout);
 
@@ -65,8 +98,11 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
                 .commit();
 
         nvDrawer = findViewById(R.id.nvView);
+        View headerView = nvDrawer.getHeaderView(0);
+          fullnameTv = (TextView) headerView.findViewById(R.id.full_name_nav);
+        userTypeTv = (TextView) headerView.findViewById(R.id.user_type_nav);
         nvDrawer.setNavigationItemSelectedListener(this);
-
+        bindViewToPreference();
     }
 
     public void fragmentSelected(@NonNull final Fragment fragment){
@@ -98,10 +134,28 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
                 toolbar.setTitle("TERMS & Conditions");
                 break;
 
+            case R.id.subscription:
+                selectedFragment = new SubscriptionFragment();
+                toolbar.setTitle("SUBSCRIPTION");
+                break;
+
             case R.id.update_profile:
                 selectedFragment = new UpdateUserProfileFragment();
                 toolbar.setTitle("PROFILE");
                 break;
+
+            case R.id.add_debit:
+                Toast.makeText(getBaseContext(),"Not Available at the moment",Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.transaction:
+                Toast.makeText(getBaseContext(),"Work in progress",Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.schedule_appointments:
+                Toast.makeText(getBaseContext(),"Work in progress",Toast.LENGTH_LONG).show();
+                break;
+
 
 //            case R.id.settings:
 //                intent = new Intent(this, Settings.class);
@@ -120,6 +174,8 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
 
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
+
+
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
             }
@@ -156,6 +212,40 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+    }
+
+    private void bindViewToPreference(){
+        RxSharedPreferences rxSharedPreferences = RxSharedPreferences.create(AppPreference.setUpDefault(getBaseContext()));
+        compositeDisposable.addAll(
+                rxSharedPreferences.getString(AppPreference.USER_DATA,"")
+                        .asObservable()
+                        .subscribe(new Consumer<String>() {
+                            @Override
+                            public void accept(String s) throws Exception {
+                                if(TextUtils.isEmpty(s) || TextUtils.equals(s, "null")){
+                                    return;
+                                }
+                                Gson gson = new GsonBuilder().create();
+                                LoginResponse userDataResponse = gson.fromJson(s,LoginResponse.class);
+
+                                fullname = userDataResponse.getData().getFirstname();
+                                usertype = userDataResponse.getData().getRole();
+
+                                Log.i("TAG",fullname);
+                                Log.i("TAG",usertype);
+
+
+                                fullnameTv.setText(fullname);
+                                userTypeTv.setText(usertype);
+                            }
+                        })
+        );
 
     }
+//
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        unbinder.unbind();
+//    }
 }

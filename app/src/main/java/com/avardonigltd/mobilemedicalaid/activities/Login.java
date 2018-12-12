@@ -3,13 +3,10 @@ package com.avardonigltd.mobilemedicalaid.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,9 +14,9 @@ import android.widget.Toast;
 import com.avardonigltd.mobilemedicalaid.R;
 import com.avardonigltd.mobilemedicalaid.interfaces.API;
 import com.avardonigltd.mobilemedicalaid.interfaces.RetrofitService;
+import com.avardonigltd.mobilemedicalaid.model.ContentModel;
 import com.avardonigltd.mobilemedicalaid.model.LoginRequest;
 import com.avardonigltd.mobilemedicalaid.model.LoginResponse;
-import com.avardonigltd.mobilemedicalaid.model.RegistrationResponse;
 import com.avardonigltd.mobilemedicalaid.utilities.NetworkChecker;
 import com.avardonigltd.mobilemedicalaid.utility.AppPreference;
 import com.google.gson.Gson;
@@ -155,11 +152,18 @@ public class Login extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.i("TAG", "It is reaching here");
                     Log.i("TAG", "It is successful");
-                    RegistrationResponse.Datum userDeatils = response.body().getData();
+                    LoginResponse.Datum userDeatils = response.body().getData();
+
+                    // not needed just a explanation on how to convert string to json
+                    Gson gson = new GsonBuilder().create();
+                    ContentModel userDataResponse = gson.fromJson(userDeatils.getContent(),ContentModel.class);
+                    userDataResponse.getCalls();
+
                     String token = response.body().getToken();
                     AppPreference.setUserData(response.body());
                     AppPreference.setToken(token);
-                    startActivity(new Intent(Login.this, NavigationalDrawer.class));
+                    //startActivity(new Intent(Login.this, NavigationalDrawer.class));
+                    startActivity(new Intent(Login.this, WelcomeMessage.class));
                 } else if (response.code() == 400) {
                     Gson gson = new GsonBuilder().create();
                     try {

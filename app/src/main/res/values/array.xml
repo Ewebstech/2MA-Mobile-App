@@ -11,7 +11,7 @@
     </string-array>
 
     <string-array name="user_array">
-        <item>Patient</item>
+        <item>patient</item>
     </string-array>
 
     <string-array name="country">
@@ -22,35 +22,34 @@
         <item>Afghanistan</item>
         <item>Aland Islands</item>
         <item>Albania</item>
-        <item>Aland Islands</item>
+        <item>Algeria</item>
+        <item>Andorra</item>
+        <item>Angola</item>
+        <item>Anguilla</item>
+        <item>Antigua And Barbuda</item>
+        <item>Argentina</item>
+        <item>Armenia</item>
+        <item>Aruba</item>
+        <item>Australia</item>
+        <item>Austria</item>
+        <item>Azerbaijan</item>
+        <item>Austria</item>
+        <item>Bahamas</item>
+        <item>Bahrain</item>
+        <item>Bangladesh</item>
+        <item>Barbados</item>
+        <item>Belarus</item>
+        <item>Belgium</item>
+        <item>Belize</item>
+        <item>Benin</item>
+        <item>Bermuda</item>
 
-        <!--<option data-code="GB" value="United Kingdom">United Kingdom</option>-->
-        <!--<option data-code="DE" value="Germany">Germany</option>-->
-        <!--<option data-code="CA" value="Canada">Canada</option>-->
-        <!--<option data-code="NG" value="Nigeria">Nigeria</option>-->
-        <!--<option disabled="disabled" value="-&#45;&#45;">-&#45;&#45;</option>-->
-        <!--<option data-code="AF" value="Afghanistan">Afghanistan</option>-->
-        <!--<option data-code="AX" value="Aland Islands">Åland Islands</option>-->
-        <!--<option data-code="AL" value="Albania">Albania</option>-->
-        <!--<option data-code="DZ" value="Algeria">Algeria</option>-->
-        <!--<option data-code="AD" value="Andorra">Andorra</option>-->
-        <!--<option data-code="AO" value="Angola">Angola</option>-->
-        <!--<option data-code="AI" value="Anguilla">Anguilla</option>-->
-        <!--<option data-code="AG" value="Antigua And Barbuda">Antigua &amp; Barbuda</option>-->
-        <!--<option data-code="AR" value="Argentina">Argentina</option>-->
-        <!--<option data-code="AM" value="Armenia">Armenia</option>-->
-        <!--<option data-code="AW" value="Aruba">Aruba</option>-->
-        <!--<option data-code="AU" value="Australia">Australia</option>-->
-        <!--<option data-code="AT" value="Austria">Austria</option>-->
-        <!--<option data-code="AZ" value="Azerbaijan">Azerbaijan</option>-->
-        <!--<option data-code="BS" value="Bahamas">Bahamas</option>-->
-        <!--<option data-code="BH" value="Bahrain">Bahrain</option>-->
-        <!--<option data-code="BD" value="Bangladesh">Bangladesh</option>-->
-        <!--<option data-code="BB" value="Barbados">Barbados</option>-->
-        <!--<option data-code="BY" value="Belarus">Belarus</option>-->
-        <!--<option data-code="BE" value="Belgium">Belgium</option>-->
-        <!--<option data-code="BZ" value="Belize">Belize</option>-->
-        <!--<option data-code="BJ" value="Benin">Benin</option>-->
+
+
+
+
+
+
         <!--<option data-code="BM" value="Bermuda">Bermuda</option>-->
         <!--<option data-code="BT" value="Bhutan">Bhutan</option>-->
         <!--<option data-code="BO" value="Bolivia">Bolivia</option>-->

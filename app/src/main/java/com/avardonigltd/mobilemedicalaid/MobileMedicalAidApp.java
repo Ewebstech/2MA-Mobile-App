@@ -3,6 +3,7 @@ package com.avardonigltd.mobilemedicalaid;
 import android.app.Application;
 
 import com.avardonigltd.mobilemedicalaid.utility.AppPreference;
+import com.avardonigltd.mobilemedicalaid.utility.RxAppPreference;
 
 public class MobileMedicalAidApp extends Application {
     private static MobileMedicalAidApp instance;
@@ -11,6 +12,7 @@ public class MobileMedicalAidApp extends Application {
     public void onCreate() {
         super.onCreate();
         AppPreference.setUpDefault(this);
+        RxAppPreference.setUpDefault(this);
         instance = this;
 
 //        Fabric.with(this, new Crashlytics());
