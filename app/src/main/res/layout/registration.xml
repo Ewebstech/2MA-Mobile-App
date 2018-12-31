@@ -63,10 +63,10 @@
             android:layout_height="wrap_content"
             android:text="* We ensure absolute security for all patients medical Information"
             android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginLeft="@dimen/_4sdp"
-            android:layout_marginStart="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
-            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginRight="@dimen/_12sdp"
             android:layout_gravity="center_horizontal"
             android:textAllCaps="false"
             android:textSize="@dimen/_12ssp"
@@ -124,6 +124,8 @@
             android:hint="Enter First Name"
             android:padding="@dimen/_10sdp"
             android:singleLine="true"
+            android:maxLines="1"
+            android:inputType="text"
             />
 
         <TextView
@@ -153,6 +155,8 @@
             android:hint="Enter Last Name"
             android:padding="@dimen/_10sdp"
             android:singleLine="true"
+            android:inputType="text"
+            android:maxLines="1"
             />
 
         <TextView
@@ -210,9 +214,10 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/reg_edit_text_bg"
             android:hint="Enter Phone"
-            android:inputType="number"
+            android:inputType="phone"
             android:padding="@dimen/_10sdp"
             android:singleLine="true"
+            android:maxLines="1"
             />
 
         <TextView
@@ -242,7 +247,7 @@
             android:background="@drawable/bgg"
             android:entries="@array/user_array"
             android:maxLines="1"
-            android:padding="8dp"
+            android:padding="@dimen/_8sdp"
             />
 
         <TextView
@@ -270,6 +275,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/reg_edit_text_bg"
             android:hint="Enter Email"
+            android:inputType="textEmailAddress"
             android:padding="@dimen/_10sdp"
             android:singleLine="true"
             />
@@ -319,7 +325,7 @@
         android:background="@null"
         android:inputType="textPassword"
         android:maxLines="1"
-        android:padding="8dp"
+        android:padding="@dimen/_8sdp"
         android:textColor="@color/black"
         />
         </android.support.design.widget.TextInputLayout>

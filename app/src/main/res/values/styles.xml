@@ -41,7 +41,6 @@
     <style name="ProgressBarTheme" parent="Widget.AppCompat.ProgressBar">
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/appBlue</item>
-
     </style>
 
     <style name="picture_animation">

@@ -1,12 +1,11 @@
 package com.avardonigltd.mobilemedicalaid.fragment;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,13 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avardonigltd.mobilemedicalaid.R;
-import com.avardonigltd.mobilemedicalaid.activities.ForgotPassword;
-import com.avardonigltd.mobilemedicalaid.activities.KYC;
-import com.avardonigltd.mobilemedicalaid.adapters.GsonPreferenceAdapter;
 import com.avardonigltd.mobilemedicalaid.interfaces.Listeners;
 import com.avardonigltd.mobilemedicalaid.model.ContentModel;
 import com.avardonigltd.mobilemedicalaid.model.LoginResponse;
 import com.avardonigltd.mobilemedicalaid.utility.AppPreference;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.f2prateek.rx.preferences2.RxSharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 
@@ -48,6 +47,9 @@ public class user_dashboard extends Fragment {
     private String mParam2;
     private Listeners mListener;
 
+
+    @BindView(R.id.profile_img)
+    CircleImageView profileImage;
     @BindView(R.id.full_name)TextView fullNameTV;
     @BindView(R.id.user_type) TextView userTV;
     @BindView(R.id.client_id) TextView clientIdTV;
@@ -59,7 +61,7 @@ public class user_dashboard extends Fragment {
     @BindView(R.id.day) TextView dateTV;
     @BindView(R.id.month) TextView monthTV;
     private String customerName, user, clientId, firstName, lastName,content,status,calls,
-            packageText, messageForStatus;
+            packageText, messageForStatus,imageUrl;
     private Unbinder unbinder;
 
     public user_dashboard() {
@@ -142,6 +144,7 @@ public class user_dashboard extends Fragment {
                                 firstName = userDataResponse.getData().getFirstname();
                                 content =  userDataResponse.getData().getContent();
                                 lastName = userDataResponse.getData().getLastname();
+                                imageUrl = userDataResponse.getData().getAvatar();
                                 Log.i("TAG",clientId);
                                 Log.i("TAG",user);
                                 Log.i("TAG",firstName);
@@ -170,6 +173,10 @@ public class user_dashboard extends Fragment {
                                     messageForStatusTV.setText(messageForStatus);
                                 }
 
+                                Glide.with(getActivity()).load("http://www.mobilemedicalaid.com/api/wtf" + imageUrl)
+                                        .apply(new RequestOptions().error(R.drawable.boy).placeholder(R.drawable.boy).fitCenter())
+                                        .into(profileImage);
+
                             }
                         })
         );
@@ -194,5 +201,28 @@ public class user_dashboard extends Fragment {
             compositeDisposable.dispose();
         }
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.callBtnDashboard)
+    public void makeCall(){
+        int call = Integer.parseInt(calls);
+        if (call == 0){
+//            clickedOn(new QuestionToCallFragment());
+//            AppPreference.setIsFirstTimeCalled(true);
+            Toast.makeText(getActivity(),"You are not eligible to make this call",Toast.LENGTH_LONG).show();
+        }
+        else {
+            AppPreference.setIsFirstTimeCalled(true);
+            clickedOn(new QuestionToCallFragment());
+        }
+    }
+
+    private void clickedOn(@NonNull Fragment fragment) {
+        final String tag = fragment.getClass().toString();
+        getFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.nav_drawer_frame_layout, fragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
     }
 }

@@ -33,9 +33,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="007cc2" />
-                            <entry key="outputName" value="ic_check_blue_24dp" />
-                            <entry key="sourceFile" value="C:\Users\s.sanusi\Downloads\blogging.svg" />
+                            <entry key="outputName" value="ic_tocall" />
+                            <entry key="sourceFile" value="C:\Users\s.sanusi\Downloads\tocall.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -500,8 +500,8 @@
                 android:layout_height="@dimen/_25sdp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/ic_blogging"
-                app:layout_constraintTop_toBottomOf="@+id/textView8"
-                tools:layout_editor_absoluteX="50dp" />
+                app:layout_constraintStart_toStartOf="@+id/textView8"
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <EditText
                 android:id="@+id/phone_tv_profile"

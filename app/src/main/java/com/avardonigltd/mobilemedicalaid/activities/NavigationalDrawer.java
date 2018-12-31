@@ -20,33 +20,45 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avardonigltd.mobilemedicalaid.MobileMedicalAidService;
 import com.avardonigltd.mobilemedicalaid.R;
+import com.avardonigltd.mobilemedicalaid.fragment.SettingsFragment;
 import com.avardonigltd.mobilemedicalaid.fragment.SubscriptionFragment;
 import com.avardonigltd.mobilemedicalaid.fragment.Terms;
 import com.avardonigltd.mobilemedicalaid.fragment.UpdateUserProfileFragment;
 import com.avardonigltd.mobilemedicalaid.fragment.user_dashboard;
+import com.avardonigltd.mobilemedicalaid.interfaces.API;
 import com.avardonigltd.mobilemedicalaid.interfaces.Listeners;
+import com.avardonigltd.mobilemedicalaid.interfaces.RetrofitService;
+import com.avardonigltd.mobilemedicalaid.model.ContentModel;
 import com.avardonigltd.mobilemedicalaid.model.LoginResponse;
+import com.avardonigltd.mobilemedicalaid.model.MakePaymentRequest;
+import com.avardonigltd.mobilemedicalaid.model.MakePaymentResponse;
 import com.avardonigltd.mobilemedicalaid.utility.AppPreference;
 import com.f2prateek.rx.preferences2.RxSharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NavigationalDrawer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,Listeners{
-
     private SharedPreferences sharedPreferences;
     private NavigationView nvDrawer;
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private Fragment selectedFragment;
     String fullname, usertype;
+    private API api;
 
+    Call<MakePaymentResponse> call;
+    List<MakePaymentRequest.MetaData.Custom.DataSent> dataSentList;
 
 
 //    @BindView(R.id.full_name_nav)
@@ -57,6 +69,8 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
 //    private Unbinder unbinder;
     TextView fullnameTv;
     TextView userTypeTv;
+    private String packageString,clientID,amount,email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +79,19 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
         setSupportActionBar(toolbar);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        api = RetrofitService.initializer();
+        dataSentList = new ArrayList<>();
 
+        LoginResponse loginResponse = AppPreference.getUserData();
+        String content = loginResponse.getData().getContent();
+        Gson gson = new GsonBuilder().create();
+        ContentModel contentModel = gson.fromJson(content,ContentModel.class);
+        amount = contentModel.getAmount();
+        packageString = contentModel.getPackages();
+        clientID = contentModel.getClient_id();
+        email = contentModel.getEmail();
+
+        Log.i("TAG",packageString + amount + clientID + email);
        // View headerView = navigationView.getHeaderView(0);
        //  fullnameTv = (TextView) headerView.findViewById(R.id.full_name_nav);
          //userTypeTv = (TextView) headerView.findViewById(R.id.user_type_nav);
@@ -125,8 +151,9 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
                 break;
 
             case R.id.kyc:
-                intent = new Intent(this, KYC.class);
-                startActivity(intent);
+               // intent = new Intent(this, KYC.class);
+               // startActivity(intent);
+                Toast.makeText(getBaseContext(),"Work in progress",Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.terms:
@@ -157,13 +184,21 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
                 break;
 
 
-//            case R.id.settings:
-//                intent = new Intent(this, Settings.class);
-//                startActivity(intent);
-//                break;
+            case R.id.payment:
+                makePaymentToPayStack(packageString,clientID,amount,email);
+                Toast.makeText(getBaseContext(),"Work in progress",Toast.LENGTH_LONG).show();
+                break;
+
+
+            case R.id.settings:
+                selectedFragment = new SettingsFragment();
+                toolbar.setTitle("SETTINGS");
+                break;
+
 
             case R.id.logout:
                 intent = new Intent(this, Login.class);
+                AppPreference.setIsLoggedIn(false);
                 startActivity(intent);
                 break;
         }
@@ -201,6 +236,14 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
     }
 
     @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+        if (requestCode == 234){
+            Log.i("TAG","it is successful");
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -212,6 +255,25 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+    }
+
+    protected void onStartService(String action) {
+
+      //  String token = TokenConstructApi.constructToken(AppPreference.getUserToken());
+        LoginResponse loginResponse = AppPreference.getUserData();
+        if (loginResponse!=null){
+            String clientId = loginResponse.getData().getClientId();
+            Intent i = new Intent(this, MobileMedicalAidService.class);
+            i.putExtra("client_id", clientId);
+            i.putExtra(MobileMedicalAidService.ACTION_TO_PERFORM, action);
+            //i.putExtra("receiver", receiverForTest);
+            startService(i);
+        }
+    }
+
+    @Override
+    public void refresh(String action) {
+        onStartService(action);
     }
 
     private void bindViewToPreference(){
@@ -242,7 +304,42 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
         );
 
     }
-//
+
+
+    public void makePaymentToPayStack(String packageStr, String clientId, String amount, String email){
+        dataSentList.add(new MakePaymentRequest.MetaData.Custom.DataSent(packageStr,clientId));
+        call = api.makePaymentMethod(new MakePaymentRequest(packageStr,clientId,amount,email,new MakePaymentRequest.MetaData(new MakePaymentRequest.MetaData.Custom(dataSentList))));
+        call.enqueue(new Callback<MakePaymentResponse>() {
+            @Override
+            public void onResponse(Call<MakePaymentResponse> call, Response<MakePaymentResponse> response) {
+                String url = response.body().getData().getUrl();
+                Log.i("TAG","It enters onResponse block");
+                if (response.isSuccessful()){
+                    Log.i("TAG","It is successful");
+                   Intent intent = new Intent(NavigationalDrawer.this,WebActivity.class);
+                    //intent.putExtra(WebActivity.EXTRA_URL,"https://checkout.paystack.com/9u8g63h6xambcod");
+                    //intent.putExtra(WebActivity.EXTRA_URL,"http://mobilemedicalaid.com/login0");
+                    intent.putExtra(WebActivity.EXTRA_URL,url);
+                    startActivityForResult(intent,234);
+                }else{
+                    Log.i("TAG","It enters error block");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MakePaymentResponse> call, Throwable t) {
+                Log.i("TAG","It enters on failure block");
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppPreference.setIsLoggedIn(true);
+    }
+
+    //
 //    @Override
 //    protected void onDestroy() {
 //        super.onDestroy();

@@ -16,10 +16,9 @@ import android.widget.TextView;
 
 import com.avardonigltd.mobilemedicalaid.R;
 import com.avardonigltd.mobilemedicalaid.adapters.MyPageAdapter;
+import com.avardonigltd.mobilemedicalaid.utility.AppPreference;
 
 public class WelcomePage extends AppCompatActivity {
-
-
     private ViewPager viewPager;
     private LinearLayout layoutDot;
     private TextView[] dotstv;
@@ -31,7 +30,7 @@ public class WelcomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //AppPreference.setIsFirstTimeLaunch(false);
+        AppPreference.setIsFirstTimeLaunch(false);
 
         setStatusBarTransparent();
 
@@ -100,13 +99,13 @@ public class WelcomePage extends AppCompatActivity {
             dotstv[i] = new TextView(this);
             dotstv[i].setText(Html.fromHtml("&#8226;"));
             dotstv[i].setTextSize(30);
-            dotstv[i].setTextColor(Color.parseColor("#a9b4bb"));
+            dotstv[i].setTextColor(Color.parseColor("#000000"));
             layoutDot.addView(dotstv[i]);
         }
 
         if (dotstv.length>0) {
 
-            dotstv[page].setTextColor(Color.parseColor("#FCC916"));
+            dotstv[page].setTextColor(Color.parseColor("#007CC2"));
         }
     }
 

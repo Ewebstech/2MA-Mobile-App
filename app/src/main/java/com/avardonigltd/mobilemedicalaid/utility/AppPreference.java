@@ -16,6 +16,7 @@ import com.google.gson.GsonBuilder;
 public class AppPreference {
     private static SharedPreferences sharedPreferences;
     public static final String IS_FIRST_TIME_LAUNCHED = "is_first_time_launched";
+    public static final String IS_FIRST_TIME_CALLED = "is_first_time_called";
     public static final String IS_FIRST_TIME_TO_KYC = "is_first_time_to_kyc";
     public static final String IS_LOGGED_IN= "is_logged_in";
     public static final String TOKEN = "token";
@@ -28,6 +29,7 @@ public class AppPreference {
     public static final String USER_DETAILS_CLIENT_ID = "user_details_client_id";
     public static final String USER_DATA= "USER_DATA";
     public static final String USER_KYC= "USER_KYC";
+    private static final String IS_FIRST_TIME_SIGN_IN= "is_first_time_sign_in";
  //   public static final String USER_DETAILS_TOKEN = "user_details_token";
 
 
@@ -40,7 +42,7 @@ public class AppPreference {
         return sharedPreferences;
     }
 
-    public void setIsFirstTimeLaunched(boolean value){
+    public static void setIsFirstTimeLaunch(boolean value){
         if (sharedPreferences!=null){
             sharedPreferences.edit().putBoolean(IS_FIRST_TIME_LAUNCHED,value).apply();
         }
@@ -50,7 +52,17 @@ public class AppPreference {
         return (sharedPreferences!=null) && sharedPreferences.getBoolean(IS_FIRST_TIME_LAUNCHED,true);
     }
 
-    public void setIsLoggedIn(boolean value){
+    public static void setIsFirstTimeCalled(boolean value){
+        if (sharedPreferences!=null){
+            sharedPreferences.edit().putBoolean(IS_FIRST_TIME_CALLED,value).apply();
+        }
+    }
+
+    public static boolean isFirstTimeCalled(){
+        return (sharedPreferences!=null) && sharedPreferences.getBoolean(IS_FIRST_TIME_CALLED,true);
+    }
+
+    public static void setIsLoggedIn(boolean value){
         if (sharedPreferences!=null){
             sharedPreferences.edit().putBoolean(IS_LOGGED_IN,value).apply();
         }
@@ -145,5 +157,15 @@ public class AppPreference {
 //        GetPackageSelecetedResponse getPackageSelecetedResponse = adapter.get(USER_DATA, sharedPreferences);
 //        return getPackageSelecetedResponse;
 //    }
+
+    public static void setIsFirstTimeSignIn(boolean firstTimeSignIn){
+        if(sharedPreferences!= null){
+            sharedPreferences.edit().putBoolean(IS_FIRST_TIME_SIGN_IN,firstTimeSignIn).apply();
+        }
+    }
+
+    public static boolean isFirstTimeSignIn(){
+        return (sharedPreferences!= null) && sharedPreferences.getBoolean(IS_FIRST_TIME_SIGN_IN,true);
+    }
 
 }

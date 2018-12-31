@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.avardonigltd.mobilemedicalaid.R;
 import com.avardonigltd.mobilemedicalaid.model.LoginResponse;
 import com.avardonigltd.mobilemedicalaid.utility.AppPreference;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.f2prateek.rx.preferences2.RxSharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,6 +18,7 @@ import com.google.gson.GsonBuilder;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 
@@ -25,9 +28,12 @@ public class Navigational_header_activity extends AppCompatActivity {
     TextView fullnameTv;
     @BindView(R.id.user_type_nav)
     TextView userTypeTv;
+    @BindView(R.id.profile_img)
+    CircleImageView profileImage;
+
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Unbinder unbinder;
-    String fullname, usertype;
+    String fullname, usertype, imageUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +58,17 @@ public class Navigational_header_activity extends AppCompatActivity {
 
                                 fullname = userDataResponse.getData().getLastname();
                                 usertype = userDataResponse.getData().getRole();
+                                imageUrl = userDataResponse.getData().getAvatar();
 
                                 Log.i("TAG",fullname);
                                 Log.i("TAG",usertype);
 
                                 fullnameTv.setText(fullname);
                                 userTypeTv.setText(fullname);
+
+                                Glide.with(getBaseContext()).load("http://www.mobilemedicalaid.com/api/wtf" + imageUrl)
+                                        .apply(new RequestOptions().error(R.drawable.boy).placeholder(R.drawable.boy).fitCenter())
+                                        .into(profileImage);
                             }
                         })
         );

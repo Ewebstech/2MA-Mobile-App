@@ -33,7 +33,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Login extends AppCompatActivity {
-
         @BindView(R.id.login_param)
         EditText emailET;
         @BindView(R.id.password_login)
@@ -92,7 +91,7 @@ public class Login extends AppCompatActivity {
 
         if (TextUtils.isEmpty(password)) {
            // passwordET.setError("Field cannot be empty");
-            Toast.makeText(getApplicationContext(),"Field cannot be empty",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Field is required",Toast.LENGTH_SHORT).show();
             Log.i("TAG","Field cannot be empty");
             passwordET.requestFocus();
             return false;
@@ -162,8 +161,14 @@ public class Login extends AppCompatActivity {
                     String token = response.body().getToken();
                     AppPreference.setUserData(response.body());
                     AppPreference.setToken(token);
+                    if (AppPreference.isFirstTimeSignIn()){
+                        startActivity(new Intent(Login.this, WelcomeMessage.class));
+                    }
+                    else {
+                        AppPreference.setIsLoggedIn(true);
+                        startActivity(new Intent(Login.this, NavigationalDrawer.class));
+                    }
                     //startActivity(new Intent(Login.this, NavigationalDrawer.class));
-                    startActivity(new Intent(Login.this, WelcomeMessage.class));
                 } else if (response.code() == 400) {
                     Gson gson = new GsonBuilder().create();
                     try {
@@ -191,7 +196,6 @@ public class Login extends AppCompatActivity {
                 Log.i("TAG", "It is reaching here");
                 progressDialog.dismiss();
                 if (call.isCanceled()) {
-
                     Log.e("TAG", "request was cancelled");
                 } else {
                     Log.e("TAG", "other larger issue, i.e. no network connection?");

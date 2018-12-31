@@ -5,6 +5,26 @@
 <item>Female</item>
 </string-array>
 
+    <string-array name="medical_arrays">
+        <item>Urgent</item>
+        <item>General</item>
+    </string-array>
+
+    <string-array name="rating_arrays">
+        <item>""</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
     <string-array name="option">
         <item>No</item>
         <item>Yes</item>
@@ -43,6 +63,17 @@
         <item>Belize</item>
         <item>Benin</item>
         <item>Bermuda</item>
+        <item>Bhutan</item>
+        <item>Bolivia</item>
+        <item>Bosnia And Herzegovina</item>
+        <item>Botswana</item>
+        <item>Bermuda</item>
+        <item>Bermuda</item>
+        <item>Bermuda</item>
+        <item>Bermuda</item>
+        <item>Bermuda</item>
+        <item>Bermuda</item>
+
 
 
 
@@ -51,8 +82,8 @@
 
 
         <!--<option data-code="BM" value="Bermuda">Bermuda</option>-->
-        <!--<option data-code="BT" value="Bhutan">Bhutan</option>-->
-        <!--<option data-code="BO" value="Bolivia">Bolivia</option>-->
+        <!--<option data-code="BT" value="">Bhutan</option>-->
+        <!--<option data-code="BO" value="">Bolivia</option>-->
         <!--<option data-code="BA" value="Bosnia And Herzegovina">Bosnia &amp; Herzegovina</option>-->
         <!--<option data-code="BW" value="Botswana">Botswana</option>-->
         <!--<option data-code="BV" value="Bouvet Island">Bouvet Island</option>-->

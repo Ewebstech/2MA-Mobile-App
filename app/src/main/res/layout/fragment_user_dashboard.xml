@@ -232,11 +232,11 @@
                                  android:textStyle="bold"
                                  android:textSize="@dimen/_16ssp"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/imageView"
-                                app:layout_constraintTop_toTopOf="@+id/imageView" />
+                                app:layout_constraintStart_toEndOf="@+id/callBtnDashboard"
+                                app:layout_constraintTop_toTopOf="@+id/callBtnDashboard" />
 
                             <ImageView
-                                android:id="@+id/imageView"
+                                android:id="@+id/callBtnDashboard"
                                 android:layout_width="@dimen/_50sdp"
                                 android:layout_height="@dimen/_50sdp"
                                 android:layout_marginLeft="@dimen/_16sdp"

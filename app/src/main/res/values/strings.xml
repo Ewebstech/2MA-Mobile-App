@@ -29,5 +29,6 @@
     <string name="naira_sign">\u20A6</string>
     <string name="we_need_to_know_more_about_you_to_enable_us_provide_the_best_medical_service_you_deserve_kindly_update_your_profile_with_your_kyc_information_it_s_easy_and_simple_although_you_can_skip_to_complete_it_later">We need to know more about you to enable us provide the best medical service you deserve. Kindly update your profile with your KYC information. It\'s easy and simple, although you can skip to complete it later.</string>
     <string name="message_kyc">We need to know our client and you can help us by helping to fill the fields in the KYC. You can skip the KYC and fill it later.</string>
+    <string name="update_kyc">Update KYC</string>
 
 </resources>

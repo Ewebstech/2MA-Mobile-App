@@ -5,13 +5,80 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
+    <ImageView
+        android:id="@+id/animation"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="100dp"
+       android:src="@drawable/ic_call"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_gravity="top"
+        android:gravity="top|center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Real Time"
+            android:textColor="@color/appBlue"
+            android:textSize="@dimen/_20ssp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Interaction"
+                android:textColor="#000"
+                android:textSize="@dimen/_20ssp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" with the doctor"
+                android:textColor="@color/appBlue"
+                android:textSize="@dimen/_20ssp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_fileName="healthtap.json" />
+        android:layout_marginBottom="@dimen/_100sdp"
+        android:layout_gravity="bottom|center"
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Patient can talk directly to doctors "
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="whenever they wish to."
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+    </LinearLayout>
 </FrameLayout>

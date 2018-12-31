@@ -106,13 +106,13 @@ public class Registration extends AppCompatActivity {
     public boolean valid(){
         initComponents();
         if (TextUtils.isEmpty(firstName)){
-            firstNameET.setError("The field cannot not be empty");
+            firstNameET.setError("Field is required");
             firstNameET.requestFocus();
             return false;
         }
 
         if (TextUtils.isEmpty(lastName)){
-            lastNameET.setError("The field cannot not be empty");
+            lastNameET.setError("Field is required");
             lastNameET.requestFocus();
             return false;
         }
@@ -131,7 +131,7 @@ public class Registration extends AppCompatActivity {
 
         if (TextUtils.isEmpty(password)){
            // passwordET.setError("The field cannot not be empty");
-            Toast.makeText(getApplicationContext(),"The field cannot not be empty",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Field is required",Toast.LENGTH_SHORT).show();
             passwordET.requestFocus();
             return false;
         }
@@ -230,7 +230,8 @@ public class Registration extends AppCompatActivity {
                             }
                         }
                         else {
-                            Toast.makeText(getApplicationContext(),"Unknown Error",Toast.LENGTH_LONG).show();
+                            Log.i("TAG","Unknown error");
+                            //Toast.makeText(getApplicationContext(),"Unknown Error",Toast.LENGTH_LONG).show();
                         }
                     }
 

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.avardonigltd.mobilemedicalaid.MobileMedicalAidService;
 import com.avardonigltd.mobilemedicalaid.R;
 import com.avardonigltd.mobilemedicalaid.activities.Login;
 import com.avardonigltd.mobilemedicalaid.adapters.PackageAdapter;
@@ -156,9 +157,13 @@ public class SubscriptionFragment extends Fragment implements PackageAdapter.OnC
                 Log.i("TAG","Package Selected");
                 progressDialog.dismiss();
                 if (response.isSuccessful()){
+                    if (mListener != null) {
+                        mListener.refresh(MobileMedicalAidService.ACTION_GET_USER_DATA);
+                    }
                     Log.i("TAG","Package Selected succesfully");
                     String message = response.body().getMessage();
                     Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
+
 
                 }else if (response.code() == 401){
                     Log.i("TAG","you are trying to select the same package");
@@ -171,6 +176,10 @@ public class SubscriptionFragment extends Fragment implements PackageAdapter.OnC
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
+                }
+
+                else if (response.code() == 500) {
+                    Toast.makeText(getActivity(), "Error 500", Toast.LENGTH_SHORT).show();
                 }
             }
 

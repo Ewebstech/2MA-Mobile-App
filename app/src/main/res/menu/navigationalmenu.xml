@@ -50,6 +50,12 @@
                 android:icon="@drawable/ic_subscription"
                 />
 
+            <item
+                android:id="@+id/payment"
+                android:title="Payment"
+                android:icon="@drawable/ic_subscription"
+                />
+
         </menu>
     </item>
 

@@ -2,11 +2,13 @@ package com.avardonigltd.mobilemedicalaid.activities;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -24,15 +27,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avardonigltd.mobilemedicalaid.MobileMedicalAidService;
 import com.avardonigltd.mobilemedicalaid.R;
 import com.avardonigltd.mobilemedicalaid.interfaces.API;
+import com.avardonigltd.mobilemedicalaid.interfaces.Listeners;
 import com.avardonigltd.mobilemedicalaid.interfaces.RetrofitService;
+import com.avardonigltd.mobilemedicalaid.model.ContentModel;
 import com.avardonigltd.mobilemedicalaid.model.KYCRequest;
 import com.avardonigltd.mobilemedicalaid.model.KYCResponse;
 import com.avardonigltd.mobilemedicalaid.model.LoginResponse;
+import com.avardonigltd.mobilemedicalaid.model.kycDataModel;
 import com.avardonigltd.mobilemedicalaid.utilities.NetworkChecker;
 import com.avardonigltd.mobilemedicalaid.utility.AppPreference;
-import com.avardonigltd.mobilemedicalaid.utility.RxAppPreference;
 import com.f2prateek.rx.preferences2.RxSharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -47,6 +53,7 @@ import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
+import butterknife.OnTextChanged;
 import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -88,8 +95,6 @@ public class KYC extends AppCompatActivity {
     @BindView(R.id.dob_et)
     EditText dobET;
 
-//    @BindView(R.id.contac_tl_kyc)
-//    TextInputLayout contactTL;
     @BindView(R.id.contact_et_kyc)
     EditText contactET;
     @BindView(R.id.postal_tl_kyc)
@@ -103,7 +108,7 @@ public class KYC extends AppCompatActivity {
     @BindView(R.id.role_et_kyc)
     EditText roleET;
 
-//    @BindView(R.id.medical_status_tl_kyc)
+    //    @BindView(R.id.medical_status_tl_kyc)
 //    TextInputLayout medicalStatusBox;
     @BindView(R.id.medical_status_et_kyc)
     EditText medicalStatusBoxET;
@@ -117,17 +122,23 @@ public class KYC extends AppCompatActivity {
     @BindView(R.id.country_spinner)
     Spinner countrySP;
 
-
     @BindView(R.id.checkbox_kyc)
     CheckBox checkBox;
 
-    private String email, phone, nominateName1, nominateName2, nominateNumber1, nominateNumber2,
-            city, postalCode, country, role, hmoInfo, medInfo, treatment,contact, hmo, medStatus;
-    private static String dob;
+    @BindView(R.id.Update_kyc_btn)
+    Button updateKYCBtn;
+
+
+    private String email, phone, oldNominateName1, oldNominateName2, oldNominateNumber1, oldNominateNumber2,
+            oldCity, oldPostalCode, oldCountry, role, oldHmoInfo, oldMedInfo, oldTreatment, oldContact, oldHmo, oldMedStatus, content;
+    ProgressDialog progressDialog;
+    private static String oldDob;
     private Unbinder unbinder;
     private API api;
     private Call<KYCResponse> call;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    String client_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,14 +146,19 @@ public class KYC extends AppCompatActivity {
         setContentView(R.layout.activity_kyc);
         unbinder = ButterKnife.bind(this);
         api = RetrofitService.initializer();
-        Log.i("TAG","On create method");
-//        assignment();
-       // bindDetailsFromSharedPreference();
-       // bindViewToPreference();
-         bindViewToPreference2();
+        Log.i("TAG", "On create method");
+       // assignment();
+        // bindDetailsFromSharedPreference();
+        // bindViewToPreference();
+        //checkFields();
+        LoginResponse loginResponse = AppPreference.getUserData();
+        if (loginResponse != null) {
+            client_id = loginResponse.getData().getClientId();
+        }
 
 
-//       // String treatment = isNull(kycDataResponse.getData().getTreatment_status()) ? "" : kycDataResponse.getData().getTreatment_status();
+
+//       // String oldTreatment = isNull(kycDataResponse.getData().getTreatment_status()) ? "" : kycDataResponse.getData().getTreatment_status();
 //        String usedata = AppPreference.USER_DATA;
 //        Gson gson = new GsonBuilder().create();
 //        LoginResponse userDataResponse = gson.fromJson(usedata,LoginResponse.class);
@@ -163,11 +179,13 @@ public class KYC extends AppCompatActivity {
 //            }
 //        }
         setYesorNo();
+        bindViewToPreference2();
     }
+
 
     @Override
     protected void onPause() {
-        if(call!=null){
+        if (call != null) {
             call.cancel();
             call = null;
         }
@@ -181,7 +199,7 @@ public class KYC extends AppCompatActivity {
     }
 
     public boolean validated() {
-        assignment();
+        //assignment();
 
         if (TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailET.setError("Invalid Email Address");
@@ -198,20 +216,20 @@ public class KYC extends AppCompatActivity {
         return true;
     }
 
-    public void assignment() {
-        email = emailET.getText().toString().trim();
-        phone = phoneET.getText().toString().trim();
-        nominateNumber1 = nominateOneNumET.getText().toString().trim();
-        nominateNumber2 = nominateTwoNumET.getText().toString().trim();
-        nominateName1 = nominateOneET.getText().toString().trim();
-        nominateNumber2 = nominateTwoET.getText().toString().trim();
-        city = cityET.getText().toString().trim();
-        postalCode = postalCodeET.getText().toString().trim();
-        role = roleET.getText().toString().trim();
-        hmoInfo = hmoDetailsET.getText().toString().trim();
-        medInfo = medicalStatusBoxET.getText().toString().trim();
-        contact = contactET.getText().toString().trim();
-    }
+//    public void assignment() {
+//        email = emailET.getText().toString().trim();
+//        phone = phoneET.getText().toString().trim();
+//        oldNominateNumber1 = nominateOneNumET.getText().toString().trim();
+//        oldNominateNumber2 = nominateTwoNumET.getText().toString().trim();
+//        oldNominateName1 = nominateOneET.getText().toString().trim();
+//        oldNominateNumber2 = nominateTwoET.getText().toString().trim();
+//        oldCity = cityET.getText().toString().trim();
+//        oldPostalCode = postalCodeET.getText().toString().trim();
+//        role = roleET.getText().toString().trim();
+//        oldHmoInfo = hmoDetailsET.getText().toString().trim();
+//        oldMedInfo = medicalStatusBoxET.getText().toString().trim();
+//        oldContact = contactET.getText().toString().trim();
+//    }
 
     public void showAlertOfEmptyFields() {
         Alerter.create(this)
@@ -245,17 +263,17 @@ public class KYC extends AppCompatActivity {
 
     @OnItemSelected({R.id.treament_spinner, R.id.hmo_reg_kyc, R.id.medical_status_kyc, R.id.country_spinner})
     public void treatmentoption() {
-        treatment = treatmentSP.getSelectedItem().toString().trim();
-        hmo = hmoSP.getSelectedItem().toString().trim();
-        medStatus = medStatusSP.getSelectedItem().toString().trim();
-        country = countrySP.getSelectedItem().toString().trim();
-        Log.i("TAG","spinner");
+        oldTreatment = treatmentSP.getSelectedItem().toString().trim();
+        oldHmo = hmoSP.getSelectedItem().toString().trim();
+        oldMedStatus = medStatusSP.getSelectedItem().toString().trim();
+        oldCountry = countrySP.getSelectedItem().toString().trim();
+        Log.i("TAG", "spinner");
         medicalIssue();
         hmoAnswered();
     }
 
     public void hmoAnswered() {
-        if (hmo.equals("Yes")) {
+        if (oldHmo.equals("Yes")) {
             hmoDetailsET.setVisibility(View.VISIBLE);
             hmoquestion.setVisibility(View.VISIBLE);
 
@@ -266,7 +284,7 @@ public class KYC extends AppCompatActivity {
     }
 
     public void medicalIssue() {
-        if (medStatus.equals("Yes")) {
+        if (oldMedStatus.equals("Yes")) {
             medicalStatusBoxET.setVisibility(View.VISIBLE);
         } else {
             medicalStatusBoxET.setVisibility(View.GONE);
@@ -300,8 +318,8 @@ public class KYC extends AppCompatActivity {
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-             dob = new StringBuilder().append(year).append("-").append(month + 1).append("-").append(day).toString();
-            ((EditText) getActivity().findViewById(R.id.dob_et)).setText(dob);
+            oldDob = new StringBuilder().append(year).append("-").append(month + 1).append("-").append(day).toString();
+            ((EditText) getActivity().findViewById(R.id.dob_et)).setText(oldDob);
         }
     }
 
@@ -330,12 +348,14 @@ public class KYC extends AppCompatActivity {
     }
 
     @OnClick(R.id.Update_kyc_btn)
-    public void sendDeatils(){
+    public void sendDeatils() {
+        Log.i("TAG", "kyc button clicked");
         if (!NetworkChecker.isNetworkAvailable(this)) {
-            Toast.makeText(this, "No network connection!",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No network connection!", Toast.LENGTH_LONG).show();
             return;
         }
-        Log.i("TAG","KYC button clicked");
+
+        Log.i("TAG", "KYC button clicked");
 
         KYCRequest update = new KYCRequest();
         String treatment = treatmentSP.getSelectedItem().toString().trim();
@@ -374,114 +394,147 @@ public class KYC extends AppCompatActivity {
         update.setDob(dob);
         update.setRole(role);
 
+        progressDialog = new ProgressDialog(KYC.this);
+        progressDialog.setProgressStyle(R.style.ProgressBarTheme);
+        progressDialog.setMessage("Loading....");
+        progressDialog.show();
 
-            call = api.editKycMethod(update);
-            call.enqueue(new Callback<KYCResponse>() {
-                @Override
-                public void onResponse(Call<KYCResponse> call, Response<KYCResponse> response) {
-                    Log.i("TAG","it is reaching the end point");
-                    if (response.isSuccessful()){
-                        Log.i("TAG","it is successful");
-                    }else{
-                        Log.i("TAG","it is not successful");
+
+        call = api.editKycMethod(update);
+        call.enqueue(new Callback<KYCResponse>() {
+            @Override
+            public void onResponse(Call<KYCResponse> call, Response<KYCResponse> response) {
+                Log.i("TAG", "it is reaching the end point");
+                progressDialog.dismiss();
+                if (response.isSuccessful()) {
+                    Log.i("TAG", "it is about to refresh");
+
+                    Intent i = new Intent(KYC.this, MobileMedicalAidService.class);
+                    i.putExtra("client_id", client_id);
+                    i.putExtra(MobileMedicalAidService.ACTION_TO_PERFORM, MobileMedicalAidService.ACTION_GET_USER_DATA);
+                    startService(i);
+
+                    Toast.makeText(getApplicationContext(),"KYC Updated",Toast.LENGTH_LONG).show();
+
+                    LoginResponse loginResponse = AppPreference.getUserData();
+                    if (loginResponse != null) {
+                        Log.i("TAG", "it is refreshed");
+                        loginResponse.getData().getContent();
+                        Gson gson = new GsonBuilder().create();
+                        ContentModel df = gson.fromJson(loginResponse.getData().getContent(), ContentModel.class);
+                        Log.i("TAG", df.getKyc().getContact_address());
                     }
-                }
 
-                @Override
-                public void onFailure(Call<KYCResponse> call, Throwable t) {
-                    Log.i("TAG","it is not reaching the end point");
-                    if (call.isCanceled()) {
 
-                        Log.e("TAG", "request was cancelled");
-                    } else {
-                        Log.e("TAG", "other larger issue, i.e. no network connection?");
-                        Log.e("TAG", t.getMessage());
-                        Toast.makeText(getBaseContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                    KYCResponse kycBody = response.body();
+                    String data = kycBody.getData();
+                    Gson gson = new GsonBuilder().create();
+
+                    kycDataModel kycData = gson.fromJson(data, kycDataModel.class);
+                    String treatment_status = kycData.getKyc().getTreatment_status();
+
+
+//                        KycModel kycData2 = gson.fromJson(kyc,KycModel.class);
+//                        String treatment_status = kycData2.getTreatment_status();
+
+                    Log.i("TAG", "it is successful");
+                } else {
+                    Log.i("TAG", "it is not successful");
                 }
-            });
+            }
+
+            @Override
+            public void onFailure(Call<KYCResponse> call, Throwable t) {
+                Log.i("TAG", "it is not reaching the end point");
+                progressDialog.dismiss();
+                if (call.isCanceled()) {
+
+                    Log.e("TAG", "request was cancelled");
+                } else {
+                    Log.e("TAG", "other larger issue, i.e. no network connection?");
+                    Log.e("TAG", t.getMessage());
+                    Toast.makeText(getBaseContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
 
-
-//    private void bindViewToPreference(){
-//        RxSharedPreferences rxSharedPreferences = RxSharedPreferences.create(AppPreference.setUpDefault(getBaseContext()));
-//        compositeDisposable.addAll(
-//                rxSharedPreferences.getString(AppPreference.USER_KYC,"")
-//                        .asObservable()
-//                        .subscribe(new Consumer<String>() {
-//                            @Override
-//                            public void accept(String s) throws Exception {
-//                                if (isNull(s)) return;
-//
-//                                Gson gson = new GsonBuilder().create();
-//                                KYCResponse kycDataResponse = gson.fromJson(s,KYCResponse.class);
-//
-//                                String treatment = isNull(kycDataResponse.getData().getKycRequest().getTreatment_status()) ? "" : kycDataResponse.getData().getKycRequest().getTreatment_status();
-//                              //  String email = isNull(AppPreference.getUserDetails().getEmail()) ? "" : AppPreference.getUserDetails().getEmail();
-//                                //String phone = isNull(AppPreference.getUserDetails().getPhoneNumber()) ? "" : AppPreference.getUserDetails().getPhoneNumber();
-//                                String nominateName1 =  isNull(kycDataResponse.getData().getKycRequest().getEmer_contact_name1()) ? "" : kycDataResponse.getData().getKycRequest().getEmer_contact_name1();
-//                                String nominateName2 = isNull(kycDataResponse.getData().getKycRequest().getEmer_contact_name2()) ? "" : kycDataResponse.getData().getKycRequest().getEmer_contact_name2();
-//                                String nominateNumber1 = isNull(kycDataResponse.getData().getKycRequest().getEmer_contact_num1()) ? "" : kycDataResponse.getData().getKycRequest().getEmer_contact_num1();
-//                                String nominateNumber2 = isNull(kycDataResponse.getData().getKycRequest().getEmer_contact_num2()) ? "" : kycDataResponse.getData().getKycRequest().getEmer_contact_num2();
-//                                String hmo = isNull(kycDataResponse.getData().getKycRequest().getHmoRegStatus()) ? "" : kycDataResponse.getData().getKycRequest().getHmoRegStatus();
-//                                String hmoInfo = isNull(kycDataResponse.getData().getKycRequest().getHmoInfo()) ? "" : kycDataResponse.getData().getKycRequest().getHmoInfo();
-//                                String medInfo =isNull(kycDataResponse.getData().getKycRequest().getMedicalConditionDetails()) ? "" : kycDataResponse.getData().getKycRequest().getMedicalConditionDetails();
-//                                String contact = isNull(kycDataResponse.getData().getKycRequest().getContactAddress()) ? "" : kycDataResponse.getData().getKycRequest().getContactAddress();
-//                                String city = isNull(kycDataResponse.getData().getKycRequest().getCity()) ? "" : kycDataResponse.getData().getKycRequest().getCity();
-//                                String postalCode = isNull(kycDataResponse.getData().getKycRequest().getPostalCode()) ? "" : kycDataResponse.getData().getKycRequest().getPostalCode();
-//                                String country = isNull(kycDataResponse.getData().getKycRequest().getCountry()) ? "" : kycDataResponse.getData().getKycRequest().getCountry();
-//                                String medStatus = isNull(kycDataResponse.getData().getKycRequest().getMedicalCondition()) ? "" : kycDataResponse.getData().getKycRequest().getMedicalCondition();
-//                                String dob = isNull(kycDataResponse.getData().getKycRequest().getDob()) ? "" : kycDataResponse.getData().getKycRequest().getDob();
-//                                //String role = isNull(AppPreference.getUserDetails().getRole()) ? "" : AppPreference.getUserDetails().getRole();
-//
-//                                Log.i("TAG",nominateName1);
-//                                Log.i("TAG",nominateName2);
-//                                Log.i("TAG",nominateNumber1);
-//                                Log.i("TAG",nominateNumber2);
-//
-//                                nominateOneET.setText(nominateName1);
-//                                nominateTwoET.setText(nominateName2);
-//                                nominateOneNumET.setText(nominateNumber1);
-//                                nominateTwoNumET.setText(nominateNumber2);
-////                                userTV.setText(user);
-////                                clientIdTV.setText(clientId);
-//                            }
-//                        })
-//        );
-//    }
-
-    private void bindViewToPreference2(){
+    private void bindViewToPreference2() {
         RxSharedPreferences rxSharedPreferences = RxSharedPreferences.create(AppPreference.setUpDefault(getBaseContext()));
         compositeDisposable.addAll(
-                rxSharedPreferences.getString(AppPreference.USER_DATA,"")
+                rxSharedPreferences.getString(AppPreference.USER_DATA, "")
                         .asObservable()
                         .subscribe(new Consumer<String>() {
                             @Override
                             public void accept(String s) throws Exception {
-                                if(TextUtils.isEmpty(s) || TextUtils.equals(s, "null")){
+                                if (TextUtils.isEmpty(s) || TextUtils.equals(s, "null")) {
                                     return;
                                 }
                                 Gson gson = new GsonBuilder().create();
-                                LoginResponse userDataResponse = gson.fromJson(s,LoginResponse.class);
+                                LoginResponse userDataResponse = gson.fromJson(s, LoginResponse.class);
 
                                 email = userDataResponse.getData().getEmail();
-                                phone= userDataResponse.getData().getPhoneNumber();
+                                phone = userDataResponse.getData().getPhoneNumber();
                                 role = userDataResponse.getData().getRole();
+                                content = userDataResponse.getData().getContent();
 
-                                Log.i("TAG",email);
-                                Log.i("TAG",phone);
-                                Log.i("TAG",role);
+                                ContentModel userDataResponse2 = gson.fromJson(content, ContentModel.class);
+                                //userDataResponse2.
+                                Log.i("TAG", email);
+                                Log.i("TAG", phone);
+                                Log.i("TAG", role);
 
                                 roleET.setText(role);
+                                roleET.setEnabled(false);
                                 phoneET.setText(phone);
+                                phoneET.setEnabled(false);
                                 emailET.setText(email);
+                                emailET.setEnabled(false);
+
+//                                if(userDataResponse2.getKyc() == null){
+//
+//                                }
+
+                              //  oldNominateName1 = isNull(userDataResponse2.getKyc().getEme_contact_name_1()) ? "" : userDataResponse2.getKyc().getEme_contact_name_1();
+//                                oldNominateName2 = isNull(userDataResponse2.getKyc().getEme_contact_name_2()) ? "" : userDataResponse2.getKyc().getEme_contact_name_2();
+//                                oldNominateNumber1 = isNull(userDataResponse2.getKyc().getEme_contact_num_1()) ? "" : userDataResponse2.getKyc().getEme_contact_num_1();
+//                                oldNominateNumber2 = isNull(userDataResponse2.getKyc().getEme_contact_num_2()) ? "" : userDataResponse2.getKyc().getEme_contact_num_2();
+//                                oldHmo = isNull(userDataResponse2.getKyc().getHmo_status()) ? "" : userDataResponse2.getKyc().getHmo_status();
+//                                oldHmoInfo = isNull(userDataResponse2.getKyc().getHmo_info()) ? "" : userDataResponse2.getKyc().getHmo_info();
+//                                oldMedInfo = isNull(userDataResponse2.getKyc().getMedical_condition_details()) ? "" : userDataResponse2.getKyc().getMedical_condition_details();
+//                                oldContact = isNull(userDataResponse2.getKyc().getContact_address()) ? "" : userDataResponse2.getKyc().getContact_address();
+//                                oldCity = isNull(userDataResponse2.getKyc().getCity()) ? "" : userDataResponse2.getKyc().getCity();
+//                                oldPostalCode = isNull(userDataResponse2.getKyc().getPostal_code()) ? "" : userDataResponse2.getKyc().getPostal_code();
+//                                oldCountry = isNull(userDataResponse2.getKyc().getCountry()) ? "" : userDataResponse2.getKyc().getCountry();
+//                                oldMedStatus = isNull(userDataResponse2.getKyc().getMedical_condition()) ? "" : userDataResponse2.getKyc().getMedical_condition();
+//                                oldDob = isNull(userDataResponse2.getKyc().getDob()) ? "" : userDataResponse2.getKyc().getDob();
+//                                oldTreatment = isNull(userDataResponse2.getKyc().getTreatment_status()) ? "" : userDataResponse2.getKyc().getTreatment_status();
+//                                Log.i("TAG", "This is the bind view sector" + oldContact);
+//
+//                                nominateOneET.setText(oldNominateName1);
+//                                nominateOneNumET.setText(oldNominateNumber1);
+//                                nominateTwoET.setText(oldNominateName2);
+//                                nominateTwoNumET.setText(oldNominateNumber2);
+//                                hmoDetailsET.setText(oldHmoInfo);
+//                                medicalStatusBoxET.setText(oldMedInfo);
+//                                contactET.setText(oldContact);
+//                                cityET.setText(oldCity);
+//                                postalCodeET.setText(oldPostalCode);
+//                                countrySP.setSelection(((ArrayAdapter<String>) countrySP.getAdapter()).getPosition(oldCountry));
+//                               //treatmentSP.setSelection(yes.getPosition(oldTreatment));
+//                                if (!TextUtils.isEmpty(oldTreatment)) {
+//                                    ArrayAdapter<String> array_spinner = (ArrayAdapter<String>) treatmentSP.getAdapter();
+//                                    treatmentSP.setSelection(array_spinner.getPosition(oldTreatment));
+//                                }
+//                                hmoSP.setSelection(((ArrayAdapter<String>) hmoSP.getAdapter()).getPosition(oldHmo));
+//                                medStatusSP.setSelection(((ArrayAdapter<String>) medStatusSP.getAdapter()).getPosition(oldMedStatus));
+//                                medicalStatusBoxET.setText(oldMedInfo);
+//                                dobET.setText(oldDob);
 
                             }
                         })
         );
-
     }
-
 
 }
