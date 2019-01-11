@@ -164,7 +164,6 @@ public class SubscriptionFragment extends Fragment implements PackageAdapter.OnC
                     String message = response.body().getMessage();
                     Toast.makeText(getActivity(),message, Toast.LENGTH_SHORT).show();
 
-
                 }else if (response.code() == 401){
                     Log.i("TAG","you are trying to select the same package");
                     Gson gson = new GsonBuilder().create();

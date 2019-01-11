@@ -58,8 +58,6 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
     private API api;
 
     Call<MakePaymentResponse> call;
-    List<MakePaymentRequest.MetaData.Custom.DataSent> dataSentList;
-
 
 //    @BindView(R.id.full_name_nav)
 //    TextView fullnameTv;
@@ -80,7 +78,6 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         api = RetrofitService.initializer();
-        dataSentList = new ArrayList<>();
 
         LoginResponse loginResponse = AppPreference.getUserData();
         String content = loginResponse.getData().getContent();
@@ -306,9 +303,8 @@ public class NavigationalDrawer extends AppCompatActivity implements NavigationV
     }
 
 
-    public void makePaymentToPayStack(String packageStr, String clientId, String amount, String email){
-        dataSentList.add(new MakePaymentRequest.MetaData.Custom.DataSent(packageStr,clientId));
-        call = api.makePaymentMethod(new MakePaymentRequest(packageStr,clientId,amount,email,new MakePaymentRequest.MetaData(new MakePaymentRequest.MetaData.Custom(dataSentList))));
+    public void makePaymentToPayStack(String packageStr, String clientId,String amount, String email){
+        call = api.makePaymentMethod(new MakePaymentRequest(packageStr,clientId,amount,email,new MakePaymentRequest.MetaData(packageStr,clientId)));
         call.enqueue(new Callback<MakePaymentResponse>() {
             @Override
             public void onResponse(Call<MakePaymentResponse> call, Response<MakePaymentResponse> response) {

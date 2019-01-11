@@ -6,43 +6,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class MakePaymentRequest {
-   @Expose @SerializedName("package") String packageStr;
+    @Expose @SerializedName("package") String packageStr;
     @Expose @SerializedName("client_id")  String clientId;
-    @Expose @SerializedName("amount") String amount;
-    @Expose @SerializedName("email") String email;
+    @Expose @SerializedName("amount")  String amount;
+    @Expose @SerializedName("email")  String email;
     @Expose @SerializedName("metadata") MetaData metaData;
-
-//    public MakePaymentRequest(String packageStr, String clientId, String amount, String email) {
-//        this.packageStr = packageStr;
-//        this.clientId = clientId;
-//        this.amount = amount;
-//        this.email = email;
-//    }
-
-
-    public MakePaymentRequest(String packageStr, String clientId, String amount, String email, MetaData metaData) {
-        this.packageStr = packageStr;
-        this.clientId = clientId;
-        this.amount = amount;
-        this.email = email;
-        this.metaData = metaData;
-    }
-
-    public String getPacakageStr() {
-        return packageStr;
-    }
-
-    public void setPacakageStr(String pacakageStr) {
-        this.packageStr = pacakageStr;
-    }
-
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
 
     public String getAmount() {
         return amount;
@@ -60,45 +28,70 @@ public class MakePaymentRequest {
         this.email = email;
     }
 
-    public static class MetaData{
-        @Expose @SerializedName("custom_fields") Custom custom;
+        public MakePaymentRequest(String packageStr, String clientId, String amount, String email,MetaData metaData) {
+        this.packageStr = packageStr;
+        this.clientId = clientId;
+        this.amount = amount;
+        this.email = email;
+    }
 
-        public MetaData(Custom custom) {
-            this.custom = custom;
+
+//    public MakePaymentRequest(String packageStr, String clientId, MetaData metaData) {
+//        this.packageStr = packageStr;
+//        this.clientId = clientId;
+//        this.metaData = metaData;
+//    }
+
+    public String getPacakageStr() {
+        return packageStr;
+    }
+
+    public void setPacakageStr(String pacakageStr) {
+        this.packageStr = pacakageStr;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public MetaData getMetaData() {
+        return metaData;
+    }
+
+    public void setMetaData(MetaData metaData) {
+        this.metaData = metaData;
+    }
+
+    public static class MetaData {
+        @Expose @SerializedName("package")
+        String packageStr;
+        @Expose
+        @SerializedName("client_id")
+        String clientId;
+
+        public MetaData(String packageStr, String clientId) {
+            this.packageStr = packageStr;
+            this.clientId = clientId;
         }
 
-        public static class Custom {
-            public List<DataSent> dataSentList;
+        public String getPackageStr() {
+            return packageStr;
+        }
 
-            public Custom(List<DataSent> dataSentList) {
-                this.dataSentList = dataSentList;
-            }
+        public void setPackageStr(String packageStr) {
+            this.packageStr = packageStr;
+        }
 
-            public static class  DataSent{
-               @Expose @SerializedName("package") String packageStr;
-                @Expose @SerializedName("client_id") String clientId;
+        public String getClientId() {
+            return clientId;
+        }
 
-                public DataSent(String packageStr, String clientId) {
-                    this.packageStr = packageStr;
-                    this.clientId = clientId;
-                }
-
-                public String getPackageStr() {
-                    return packageStr;
-                }
-
-                public void setPackageStr(String packageStr) {
-                    this.packageStr = packageStr;
-                }
-
-                public String getClientId() {
-                    return clientId;
-                }
-
-                public void setClientId(String clientId) {
-                    this.clientId = clientId;
-                }
-            }
+        public void setClientId(String clientId) {
+            this.clientId = clientId;
         }
     }
 }

@@ -507,7 +507,7 @@ public class KYC extends AppCompatActivity {
 //                                oldCity = isNull(userDataResponse2.getKyc().getCity()) ? "" : userDataResponse2.getKyc().getCity();
 //                                oldPostalCode = isNull(userDataResponse2.getKyc().getPostal_code()) ? "" : userDataResponse2.getKyc().getPostal_code();
 //                                oldCountry = isNull(userDataResponse2.getKyc().getCountry()) ? "" : userDataResponse2.getKyc().getCountry();
-//                                oldMedStatus = isNull(userDataResponse2.getKyc().getMedical_condition()) ? "" : userDataResponse2.getKyc().getMedical_condition();
+//                                 oldMedStatus = isNull(userDataResponse2.getKyc().getMedical_condition()) ? "" : userDataResponse2.getKyc().getMedical_condition();
 //                                oldDob = isNull(userDataResponse2.getKyc().getDob()) ? "" : userDataResponse2.getKyc().getDob();
 //                                oldTreatment = isNull(userDataResponse2.getKyc().getTreatment_status()) ? "" : userDataResponse2.getKyc().getTreatment_status();
 //                                Log.i("TAG", "This is the bind view sector" + oldContact);

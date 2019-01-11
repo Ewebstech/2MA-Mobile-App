@@ -151,27 +151,27 @@ public class user_dashboard extends Fragment {
 
                                 // to convert string to object also
                                 ContentModel userDataResponse2 = gson.fromJson(content,ContentModel.class);
-                                calls = userDataResponse2.getCalls();
-                                status = userDataResponse2.getStatus();
-                                packageText = userDataResponse2.getPackages();
-                                customerName = firstName+" "+lastName;
-                                fullNameTV.setText(customerName);
-                                userTV.setText(user);
-                                clientIdTV.setText(clientId);
-                                statusTv.setText(status);
-                                callsTv.setText(calls);
-
-                                if (status.equals("Active")){
-                                    packageTv.setText(packageText);
-                                    statusTv.setTextColor(getResources().getColor(R.color.appyellow));
-                                    messageForStatus = "Activated to make calls to Doctors";
-                                    messageForStatusTV.setText(messageForStatus);
-                                }else {
-                                    packageTv.setText(packageText);
-                                    statusTv.setTextColor(getResources().getColor(R.color.appRed));
-                                    messageForStatus = "Subscription Exhausted";
-                                    messageForStatusTV.setText(messageForStatus);
-                                }
+//                                calls = userDataResponse2.getCalls();
+//                                status = userDataResponse2.getStatus();
+//                                packageText = userDataResponse2.getPackages();
+//                                customerName = firstName+" "+lastName;
+//                                fullNameTV.setText(customerName);
+//                                userTV.setText(user);
+//                                clientIdTV.setText(clientId);
+//                                statusTv.setText(status);
+//                                callsTv.setText(calls);
+//
+//                                if (status.equals("Active")){
+//                                    packageTv.setText(packageText);
+//                                    statusTv.setTextColor(getResources().getColor(R.color.appyellow));
+//                                    messageForStatus = "Activated to make calls to Doctors";
+//                                    messageForStatusTV.setText(messageForStatus);
+//                                }else {
+//                                    packageTv.setText(packageText);
+//                                    statusTv.setTextColor(getResources().getColor(R.color.appRed));
+//                                    messageForStatus = "Subscription Exhausted";
+//                                    messageForStatusTV.setText(messageForStatus);
+//                                }
 
                                 Glide.with(getActivity()).load("http://www.mobilemedicalaid.com/api/wtf" + imageUrl)
                                         .apply(new RequestOptions().error(R.drawable.boy).placeholder(R.drawable.boy).fitCenter())
