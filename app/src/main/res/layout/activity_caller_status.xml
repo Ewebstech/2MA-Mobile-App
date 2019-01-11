@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.CallerStatus">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/noInternetView"
+        >
+
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginBottom="@dimen/_8sdp"-->
+            <!--android:layout_marginEnd="@dimen/_8sdp"-->
+            <!--android:layout_marginLeft="@dimen/_8sdp"-->
+            <!--android:layout_marginRight="@dimen/_8sdp"-->
+            <!--android:layout_marginStart="@dimen/_8sdp"-->
+            <!--android:layout_marginTop="@dimen/_8sdp"-->
+            <!--android:text="Cannot Match Caller with 2MA"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textSize="@dimen/_15ssp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+
+        <ImageView
+            android:id="@+id/barredimage"
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_180sdp"
+            android:layout_marginBottom="@dimen/_100sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_100sdp"
+            android:contentDescription="splashScreen logo"
+            android:src="@drawable/barredphone"
+            app:layout_constraintBottom_toTopOf="@+id/messageSplash"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/yetToidentifyCallerMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_180sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="Cannot Match Caller with 2MA"
+            android:textAlignment="center"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/appBlue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
+
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/callerInfoPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/appBlue"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/imageView22"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_60sdp"
+            android:src="@drawable/boy"
+            app:layout_constraintEnd_toEndOf="@+id/clientNameTV"
+            app:layout_constraintHorizontal_bias="0.529"
+            app:layout_constraintStart_toStartOf="@+id/clientNameTV"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/clientNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:text="Sanusi Sheriff"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_25sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView182"
+            app:layout_constraintStart_toStartOf="@+id/textView182"
+            app:layout_constraintTop_toBottomOf="@+id/imageView22" />
+
+        <TextView
+            android:id="@+id/textView182"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:layout_marginLeft="@dimen/_24sdp"
+            android:layout_marginRight="@dimen/_24sdp"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:text="The client is eligible to make this call. You can go ahead to receive this call"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clientNameTV" />
+
+        <Button
+            android:id="@+id/failureBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:background="@drawable/status_button_bg"
+
+            android:padding="@dimen/_4sdp"
+            android:text="Send Details"
+            android:textColor="@color/appBlue"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subPlaceholer" />
+
+        <TextView
+            android:id="@+id/clientPhoneNumberPH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_32sdp"
+            android:text="Client Phonenumber:"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView182"
+            app:layout_constraintTop_toBottomOf="@+id/textView182" />
+
+        <TextView
+            android:id="@+id/subPlaceholer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:text="Subcription Status:"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/clientPhoneNumberPH"
+            app:layout_constraintTop_toBottomOf="@+id/clientPhoneNumberPH" />
+
+        <TextView
+            android:id="@+id/clientNumberTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="08023119233"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/clientPhoneNumberPH"
+            app:layout_constraintStart_toEndOf="@+id/clientPhoneNumberPH"
+            app:layout_constraintTop_toTopOf="@+id/clientPhoneNumberPH" />
+
+        <TextView
+            android:id="@+id/subStatusTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="Active"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/subPlaceholer"
+            app:layout_constraintStart_toEndOf="@+id/subPlaceholer" />
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/callerInfoPageInactive"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/red"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/imageOfClientInactive"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_56sdp"
+            android:src="@drawable/boy"
+            app:layout_constraintEnd_toEndOf="@+id/clientNameTVInactive"
+            app:layout_constraintHorizontal_bias="0.529"
+            app:layout_constraintStart_toStartOf="@+id/clientNameTVInactive"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/clientNameTVInactive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:text="Sanusi Sheriff"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_25ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/messageToDoctor"
+            app:layout_constraintStart_toStartOf="@+id/messageToDoctor"
+            app:layout_constraintTop_toBottomOf="@+id/imageOfClientInactive" />
+
+        <TextView
+            android:id="@+id/messageToDoctor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:layout_marginLeft="@dimen/_24sdp"
+            android:layout_marginRight="@dimen/_24sdp"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:text="The client is not eligible to make this call. You are adviced not to pick up this call."
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clientNameTVInactive" />
+
+        <Button
+            android:id="@+id/terminateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/status_button_bg"
+            android:padding="@dimen/_4sdp"
+            android:text="Terminate call"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/messageToDoctor" />
+
+        <TextView
+            android:id="@+id/clientPhoneNumberPHInActive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_32sdp"
+            android:text="Client Phonenumber:"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintStart_toStartOf="@+id/messageToDoctor"
+            app:layout_constraintTop_toBottomOf="@+id/messageToDoctor" />
+
+        <TextView
+            android:id="@+id/subPlaceholerInactive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:text="Subcription Status:"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintStart_toStartOf="@+id/clientPhoneNumberPHInActive"
+            app:layout_constraintTop_toBottomOf="@+id/clientPhoneNumberPHInActive" />
+
+        <TextView
+            android:id="@+id/clientNumberTVInactive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="08023119233"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/clientPhoneNumberPHInActive"
+            app:layout_constraintStart_toEndOf="@+id/clientPhoneNumberPHInActive"
+            app:layout_constraintTop_toTopOf="@+id/clientPhoneNumberPHInActive" />
+
+        <TextView
+            android:id="@+id/subStatusTVInactive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:text="InActive"
+            android:textSize="@dimen/_15ssp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/subPlaceholerInactive"
+            app:layout_constraintStart_toEndOf="@+id/subPlaceholerInactive" />
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</FrameLayout>

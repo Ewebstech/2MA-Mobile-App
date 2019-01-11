@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.CallerStatus"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/callerInfoPageCI"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/appBlue"
+
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userImage"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/boy"
+                app:layout_constraintEnd_toEndOf="@+id/clientNameTV"
+                app:layout_constraintHorizontal_bias="0.529"
+                app:layout_constraintStart_toStartOf="@+id/clientNameTV"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/clientNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:text="Sanusi Sheriff"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_25sdp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/textView182"
+                app:layout_constraintStart_toStartOf="@+id/textView182"
+                app:layout_constraintTop_toBottomOf="@+id/userImage" />
+
+            <TextView
+                android:id="@+id/textView182"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_marginLeft="@dimen/_24sdp"
+                android:layout_marginRight="@dimen/_24sdp"
+                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:text="The client is eligible to make this call. You can go ahead to receive this call"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clientNameTV" />
+
+            <Button
+                android:id="@+id/sendBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/status_button_bg"
+                android:padding="@dimen/_8sdp"
+                android:text="Send Details"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/appBlue"
+                android:textStyle="bold"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.554"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/otherInfoCITV" />
+
+            <TextView
+                android:id="@+id/clientPhoneNumberPH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="16dp"
+                android:text="Client Phonenumber:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView182"
+                app:layout_constraintTop_toBottomOf="@+id/textView182" />
+
+            <TextView
+                android:id="@+id/subPlaceholer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Subcription Status:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/clientPhoneNumberPH"
+                app:layout_constraintTop_toBottomOf="@+id/clientPhoneNumberPH" />
+
+            <TextView
+                android:id="@+id/clientNumberTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:text="08023119233"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/clientPhoneNumberPH"
+                app:layout_constraintStart_toEndOf="@+id/clientPhoneNumberPH"
+                app:layout_constraintTop_toTopOf="@+id/clientPhoneNumberPH" />
+
+            <TextView
+                android:id="@+id/subStatusTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:text="Active"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/subPlaceholer"
+                app:layout_constraintStart_toEndOf="@+id/subPlaceholer"
+                app:layout_constraintTop_toTopOf="@+id/subPlaceholer" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="MedicalNeed:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/subPlaceholer"
+                app:layout_constraintTop_toBottomOf="@+id/subPlaceholer" />
+
+            <TextView
+                android:id="@+id/medicalNeedCITV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="Urgent"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Severe Index:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/severeIndexCITV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="Null"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView4"
+                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Treatment Taken:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <TextView
+                android:id="@+id/treatmentTakenCITV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginStart="8dp"
+                android:text="Null"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textView6"
+                app:layout_constraintTop_toTopOf="@+id/textView6"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Any Allergies:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView6"
+                app:layout_constraintTop_toTopOf="@+id/allergiesCITV" />
+
+            <TextView
+                android:id="@+id/allergiesCITV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Null"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/textView8"
+                app:layout_constraintTop_toBottomOf="@+id/treatmentTakenCITV" />
+
+            <TextView
+                android:id="@+id/allergiesInfamilyCITV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="No"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/allergiesCITV" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other Info:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintTop_toTopOf="@+id/otherInfoCITV" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Any Allergies in the family:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView8"
+                app:layout_constraintTop_toTopOf="@+id/allergiesInfamilyCITV" />
+
+            <TextView
+                android:id="@+id/otherInfoCITV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Null"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView11"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        </android.support.constraint.ConstraintLayout>
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:id="@+id/callerInfoPageInactiveCI"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/red"-->
+            <!--android:visibility="visible"-->
+            <!--&gt;-->
+
+            <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/imageOfClientInactiveCI"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="@dimen/_80sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="@dimen/_80sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="@dimen/_56sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:src="@drawable/boy"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintEnd_toEndOf="@+id/clientNameTVInactiveCI"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintHorizontal_bias="0.529"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintStart_toStartOf="@+id/clientNameTVInactiveCI"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/clientNameTVInactiveCI"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="@dimen/_6sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="Sanusi Sheriff"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@color/white"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="@dimen/_25ssp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintEnd_toEndOf="@+id/messageToDoctor"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintStart_toStartOf="@+id/messageToDoctor"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintTop_toBottomOf="@+id/imageOfClientInactiveCI" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/messageToDoctor"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginEnd="@dimen/_24sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginLeft="@dimen/_24sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginRight="@dimen/_24sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginStart="@dimen/_24sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="@dimen/_24sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="The client is not eligible to make this call. You are adviced not to pick up this call."&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textAlignment="center"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@color/white"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="@dimen/_12ssp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textStyle="italic"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintTop_toBottomOf="@+id/clientNameTVInactiveCI" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/terminateBtnCI"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginBottom="@dimen/_24sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginEnd="@dimen/_8sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginLeft="@dimen/_8sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginRight="@dimen/_8sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginStart="@dimen/_8sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="@dimen/_8sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:background="@drawable/status_button_bg"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:padding="@dimen/_4sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="Terminate call"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@color/red"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintTop_toBottomOf="@+id/messageToDoctor" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/clientPhoneNumberPHInActive"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginLeft="@dimen/_8sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginStart="@dimen/_8sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="@dimen/_32sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="Client Phonenumber:"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@color/white"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="@dimen/_15ssp"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintStart_toStartOf="@+id/messageToDoctor"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintTop_toBottomOf="@+id/messageToDoctor" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/subPlaceholerInactive"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="@dimen/_16sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="Subcription Status:"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@color/white"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="@dimen/_15ssp"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintStart_toStartOf="@+id/clientPhoneNumberPHInActive"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintTop_toBottomOf="@+id/clientPhoneNumberPHInActive" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/clientNumberTVInactiveCI"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginLeft="@dimen/_4sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginStart="@dimen/_4sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="08023119233"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="@dimen/_15ssp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@color/white"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintBottom_toBottomOf="@+id/clientPhoneNumberPHInActive"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintStart_toEndOf="@+id/clientPhoneNumberPHInActive"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintTop_toTopOf="@+id/clientPhoneNumberPHInActive" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/subStatusTVInactiveCI"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginLeft="@dimen/_8sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginStart="@dimen/_8sdp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="InActive"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="@dimen/_15ssp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@color/white"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintBottom_toBottomOf="@+id/subPlaceholerInactive"&ndash;&gt;-->
+                <!--&lt;!&ndash;app:layout_constraintStart_toEndOf="@+id/subPlaceholerInactive" />&ndash;&gt;-->
+        <!--</android.support.constraint.ConstraintLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/red"
+             android:id="@+id/newInative"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:id="@+id/closeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/ic_cancel_white_24dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
+
+                >
+
+
+                <TextView
+                    android:id="@+id/messageInactiveTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No Consultancy Case was Found for this Client. Please Terminate Call."
+                    android:gravity="center"
+                    android:textSize="@dimen/_15ssp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    />
+
+                <Button
+                    android:id="@+id/terminateBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:text="Refuse Call"
+                    android:padding="@dimen/_8sdp"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="@color/red"
+                    android:textAllCaps="false"
+                    android:background="@drawable/status_button_bg"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </FrameLayout>
+    </ScrollView>
+
+
+

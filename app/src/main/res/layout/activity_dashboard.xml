@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_height="@dimen/_210sdp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/dashboardheader"
+                xmlns:android="http://schemas.android.com/apk/res/android" >
+
+                <TextView
+                    android:id="@+id/logoutDB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_cancel_white_24dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Log Out"
+                    android:drawableEnd="@drawable/ic_power_settings_new_black_24dp"
+                    android:drawableRight="@drawable/ic_power_settings_new_black_24dp"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:textSize="@dimen/_16ssp"
+                    android:textColor="@color/black"
+                    />
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_img"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:contentDescription="profile"
+                    app:civ_border_width="@dimen/_2sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    app:civ_border_color="#FF000000"
+                    android:src="@drawable/boy" />
+
+                <TextView
+                    android:id="@+id/full_name_dashboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/profile_img"
+                    android:layout_toEndOf="@+id/profile_img"
+                    android:layout_toRightOf="@+id/profile_img"
+                    android:text="Sanusi Sheriff"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:textSize="@dimen/_20ssp"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/appBlue" />
+
+                <TextView
+                    android:id="@+id/roleTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/profile_img"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:layout_toEndOf="@+id/profile_img"
+                    android:layout_toRightOf="@+id/profile_img"
+                    android:text="Patient"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/appBlue"
+                    android:textSize="@dimen/_15ssp" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_120sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:cardElevation="@dimen/_8sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:orientation="horizontal"
+                    >
+                    <LinearLayout
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_5sdp"
+                        android:gravity="center"
+                        android:background="@color/appBlue"
+                        >
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_4sdp"
+                            android:layout_marginLeft="@dimen/_4sdp"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:layout_marginStart="@dimen/_4sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="MODE"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14ssp"
+                            />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:id="@+id/message_for_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_4sdp"
+                            android:layout_marginLeft="@dimen/_4sdp"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:layout_marginStart="@dimen/_4sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="You can receive calls from Patients"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp"
+                            />
+
+                        <TextView
+                            android:id="@+id/status_dashboard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_4sdp"
+                            android:layout_marginLeft="@dimen/_4sdp"
+                            android:layout_marginRight="@dimen/_4sdp"
+                            android:layout_marginStart="@dimen/_4sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="Active"
+                            android:textStyle="bold"
+                            android:textColor="@color/appGreen"
+                            android:textSize="@dimen/_12ssp"
+                            />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:cardElevation="@dimen/_8sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_80sdp"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="1"
+                        >
+                        <android.support.constraint.ConstraintLayout
+                            android:layout_width="@dimen/_200sdp"
+                            android:layout_height="@dimen/_60sdp"
+                            android:orientation="vertical"
+                            android:layout_weight="0.8"
+                            >
+                            <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginEnd="@dimen/_4sdp"-->
+                            <!--android:layout_marginLeft="@dimen/_4sdp"-->
+                            <!--android:layout_marginRight="@dimen/_4sdp"-->
+                            <!--android:layout_marginStart="@dimen/_4sdp"-->
+                            <!--android:layout_marginTop="@dimen/_2sdp"-->
+                            <!--android:text="Credit Details"-->
+                            <!--android:textStyle="bold"-->
+                            <!--android:textSize="@dimen/_12ssp"-->
+                            <!--/>-->
+
+                            <!--<LinearLayout-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:orientation="horizontal"-->
+                            <!--&gt;-->
+
+                            <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginEnd="@dimen/_4sdp"-->
+                            <!--android:layout_marginLeft="@dimen/_4sdp"-->
+                            <!--android:layout_marginRight="@dimen/_4sdp"-->
+                            <!--android:layout_marginStart="@dimen/_4sdp"-->
+                            <!--android:layout_marginTop="@dimen/_2sdp"-->
+                            <!--android:text="Client ID:"-->
+                            <!--android:textStyle="bold"-->
+                            <!--android:textSize="@dimen/_12ssp"-->
+                            <!--/>-->
+
+                            <!--<TextView-->
+                            <!--android:id="@+id/client_id"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="@dimen/_2sdp"-->
+                            <!--android:text=" 5dRT6F"-->
+                            <!--android:textSize="@dimen/_12ssp" />-->
+
+                            <!--</LinearLayout>-->
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/_8sdp"
+                                android:layout_marginLeft="@dimen/_8sdp"
+                                android:layout_marginRight="@dimen/_8sdp"
+                                android:layout_marginStart="@dimen/_8sdp"
+                                android:text="Doctor Id"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_16ssp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/callBtnDashboard"
+                                app:layout_constraintTop_toTopOf="@+id/callBtnDashboard" />
+
+                            <ImageView
+                                android:id="@+id/callBtnDashboard"
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_marginBottom="@dimen/_4sdp"
+                                android:layout_marginLeft="@dimen/_16sdp"
+                                android:layout_marginStart="@dimen/_16sdp"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:src="@drawable/stethoscope"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/doctorIdTV"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:text="45Yh678"
+                                android:textSize="@dimen/_12ssp"
+                                app:layout_constraintEnd_toEndOf="@+id/textView"
+                                app:layout_constraintStart_toStartOf="@+id/textView"
+                                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                        </android.support.constraint.ConstraintLayout>
+
+                        <LinearLayout
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="@dimen/_60sdp"
+                            android:background="@color/appBlue"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_5sdp"
+                            >
+
+                            <TextView
+                                android:id="@+id/day"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="10"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_20ssp" />
+
+                            <TextView
+                                android:id="@+id/month"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DECEMBER"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10ssp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_margin="8dp"-->
+        <!--/>-->
+    </LinearLayout>
+</ScrollView>
